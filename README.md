@@ -1,5 +1,6 @@
 # 🛒 Shopping Cart App (React + Vite)
 
+Visit at shopping-cart-beta-puce.vercel.app
 A simple and modern **Shopping Cart application** built using **React, Vite, and Styled Components**.  
 Users can browse products, add/remove items from the cart, and view total price dynamically.
 
@@ -37,8 +38,8 @@ cd shopping-cart
 npm install
 3. Run the development server
 npm run dev
-
-🔗 API Used
+```
+## 🔗 API Used
 
 Products are fetched from:
 
@@ -50,13 +51,12 @@ Immutable state updates
 Conditional rendering
 Component reusability
 
-🚀 Future Improvements
+## 🚀 Future Improvements
 ✅ Add authentication
 🛍️ Add checkout flow
 💾 Persist cart (localStorage)
 🔍 Add search & filters
 📱 Make UI fully responsive
-🙌 Author
 
+## 🙌 Author
 Harsh Kumar
-```
