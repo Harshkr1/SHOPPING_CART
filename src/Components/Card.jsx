@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { useState } from "react";
 const CardContainer = styled.div`
   width: 250px;
   padding: 16px;
@@ -18,7 +18,7 @@ const CardContainer = styled.div`
 const Title = styled.h3`
   font-size: 1.1rem;
   margin-bottom: 10px;
-  color:black;
+  color: black;
 `;
 
 const Image = styled.img`
@@ -45,7 +45,11 @@ const Discount = styled.span`
   font-size: 0.85rem;
   color: #e53e3e;
 `;
-
+const Count = styled.span`
+  font-size: 0.85rem;
+  color: #000000;
+  font-weight: 700;
+`;
 const Button = styled.button`
   padding: 10px 20px;
   border-radius: 8px;
@@ -65,9 +69,38 @@ const Button = styled.button`
 
 const ButtonGroup = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
 `;
-export default function Card({ product }) {
+
+export default function Card({
+  product,
+  setCartProduct,
+  source,
+  setCartCount,
+}) {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCartProduct((prev) => [...prev, product]);
+    setCount((c) => c + 1);
+    setCartCount((c) => c + 1);
+  };
+
+  const handleDecrement = () => {
+    setCartProduct((prev) => {
+      const index = prev.findIndex((item) => item.id === product.id);
+      if (index === -1) return prev;
+
+      const newCart = [...prev];
+      newCart.splice(index, 1);
+      return newCart;
+    });
+    setCount((c) => c - 1);
+    setCartCount((c) => c - 1);
+  };
+
   return (
     <CardContainer>
       <Title>{product.title}</Title>
@@ -76,8 +109,17 @@ export default function Card({ product }) {
       <Price>₹{product.price}</Price>
       <Discount>Discount: {product.discountPercentage}%</Discount>
       <ButtonGroup>
-        <Button>Add to Cart</Button>
-        <Button>Order</Button>
+        <ButtonGroup>
+          {source === 2 ? (
+            <>
+              <Button onClick={handleDecrement}>-</Button>
+              <Count>{count}</Count>
+              <Button onClick={handleIncrement}>+</Button>
+            </>
+          ) : (
+            <Button onClick={handleDecrement}>Remove from Cart</Button>
+          )}
+        </ButtonGroup>
       </ButtonGroup>
     </CardContainer>
   );

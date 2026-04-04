@@ -7,7 +7,9 @@ function App() {
   const [cartCount, setCartCount] = useState(0);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-
+  const [cartProduct, setCartProduct] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
+  console.log(cartProduct + "HI");
   useEffect(() => {
     const fetchProductList = () => {
       fetch("https://dummyjson.com/products?limit=12")
@@ -29,7 +31,9 @@ function App() {
   return (
     <>
       <Navbar cartCount={cartCount} />
-      <Outlet context={[products, setProducts]} />
+      <Outlet
+        context={{ products, setProducts, cartProduct, setCartProduct, cartTotal, setCartTotal,setCartCount}}
+      />
     </>
   );
 }

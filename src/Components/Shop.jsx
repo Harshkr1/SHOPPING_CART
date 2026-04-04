@@ -9,20 +9,28 @@ const Container = styled.div`
   padding: 0 70px;
 `;
 
-const Title =styled.h1`
-    color:White;
-    margin:2.5rem;
-`
+const Title = styled.h1`
+  color: White;
+  margin: 2.5rem;
+`;
 export default function Shop() {
-  const [products, setProducts] = useOutletContext();
+  const { products, setCartProduct,setCartCount } = useOutletContext();
   console.log(products);
 
   return (
     <>
-    <Title>Our Products:</Title>
+      <Title>Our Products:</Title>
       <Container>
-        {products.map((product) => {
-          return <Card product={product} />;
+        {products.map((product, id) => {
+          return (
+            <Card
+              product={product}
+              key={id}
+              setCartProduct={setCartProduct}
+              source={2}
+              setCartCount={setCartCount}
+            />
+          );
         })}
       </Container>
     </>
